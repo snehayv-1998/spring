@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+        "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+
+    <!-- bean definitions here -->
+
+    <bean id ="triangle" class="com.example.spring.Triangle">
+        <!--Constructor injection -->
+       <!-- <constructor-arg index=1 value="Equilateral triangle "/> -->
+        <constructor-arg type="int" value="3"/>
+        <!--- setter injection-->
+        <property name="type" value="Right angled triangle"/>
+        <property name="pointA" ref="zeroPoint"/>
+        <!-- Inner Bean-->
+        <property name="pointB">
+            <bean class="com.example.spring.Point">
+                <property name = "x" value = "20"></property>
+                <property name = "y" value = "0"></property>
+            </bean>
+        </property>
+        <property name="pointC">
+            <bean class="com.example.spring.Point">
+                <property name = "x" value = "20"></property>
+                <property name = "y" value = "20"></property>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="zeroPoint" class="com.example.spring.Point">
+        <property name="x" value="0"/>
+        <property name="y" value="0"/>
+    </bean>
+
+    <alias name="triangle" alias="right-angled-triangle"/>
+
+    <bean id="square" class="com.example.spring.Square">
+        <property name="points">
+            <list>
+                <ref bean="zeroPoint" />
+                <ref bean="pointB" />
+                <ref bean="pointC" />
+                <ref bean="pointD" />
+            </list>
+        </property>
+    </bean>
+    <bean id ="pointB" class="com.example.spring.Point">
+        <property name = "x" value = "20"></property>
+        <property name = "y" value = "0"></property>
+    </bean>
+    <bean id ="pointC" class="com.example.spring.Point">
+        <property name = "x" value = "0"></property>
+        <property name = "y" value = "20"></property>
+    </bean>
+    <bean id ="pointD" class="com.example.spring.Point">
+        <property name = "x" value = "30"></property>
+        <property name = "y" value = "20"></property>
+    </bean>
+</beans>
